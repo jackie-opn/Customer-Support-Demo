@@ -19,19 +19,27 @@
     }
 
     .side-bar {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        background-color: white;
+        width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+    }
+
+    .side-bar-header {
+        padding: 12px 14px;
+        flex-shrink: 0;
+        border-bottom: 1px solid #e0e4e8;
     }
 
     .header-title {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 10px;
-        font-size: 18px;
-        font-weight: 800;
-        color: #000000;
+        gap: 8px;
+        font-size: 15px;
+        line-height: 1.3;
+        min-width: 0;
+        overflow-wrap: anywhere;
+        word-break: break-word;
     }
 
     .header-logo-wrap {
@@ -57,6 +65,9 @@
 
     .side-bar-actions {
         margin: 16px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
         flex-shrink: 0;
     }
 
@@ -72,11 +83,16 @@
     .action-btns {
         display: flex;
         flex-direction: column;
-        width: 20%;
-        gap: 5px;
+        width: 100%;
+        max-width: 100%;
+        gap: 8px;
     }
 
     .action-btn {
+        width: 100%;
+        max-width: 100%;
+        word-break: break-word;
+        box-sizing: border-box;
         padding: 11px 14px;
         margin-bottom: 0;
         background: linear-gradient(135deg, #fff5eb 0%, #ffe8d0 100%);
@@ -253,8 +269,20 @@
 
     <script type="module">
         import HelpScout from 'https://esm.sh/@helpscout/javascript-sdk';
+
+        const root = document.querySelector('.side-bar');
+        function syncAppHeight() {
+            if (!root) return;
+            const h = Math.ceil(root.getBoundingClientRect().height);
+            HelpScout.setAppHeight(Math.max(h, 520));
+        }
+        syncAppHeight();
+        window.addEventListener('resize', syncAppHeight);
+        if (root && typeof ResizeObserver !== 'undefined') {
+            new ResizeObserver(syncAppHeight).observe(root);
+        }
       
-        const MERCHANT_PANEL_URL = 'https://your-host/merchant.html';
+        const MERCHANT_PANEL_URL = 'https://jackie-opn.github.io/Customer-Support-Demo/merchant.html';
       
         document.querySelectorAll('.action-btn').forEach((btn) => {
           btn.addEventListener('click', () => {
