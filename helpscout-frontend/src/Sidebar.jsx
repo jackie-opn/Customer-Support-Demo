@@ -2,8 +2,8 @@ import HelpScout from '@helpscout/javascript-sdk';
 import './Sidebar.css';
 
 function Sidebar() {
-    const handleOpenMerchantPanel = () => {
-        HelpScout.openSidePanel('...');
+    const handleOpenSummaryPanel = () => {
+        HelpScout.openSidePanel('http://localhost:5173/#/panel');
     };
 
     return (
@@ -20,7 +20,7 @@ function Sidebar() {
             <div className="side-bar-actions">
                 <div className="action-title">AI Quick Actions</div>
                 <div className="action-btns">
-                    <button className="action-btn">AI Summary</button>
+                    <button className="action-btn" onClick={handleOpenSummaryPanel}>AI Summary</button>
                     <button className="action-btn">AI Tagging</button>
                     <button className="action-btn">AI Draft Reply</button>
                     <button className="action-btn">Custom Fields Quick Fill</button>
