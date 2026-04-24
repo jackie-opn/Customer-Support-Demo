@@ -9,7 +9,13 @@ function App() {
   // comment out whole useEffect for local UI testing
   useEffect(() => {
     // get parameter set
-    const rawQuery = window.location.search;
+    let rawQuery = window.location.search.replace(/^\?/, '');
+
+    if (!rawQuery && window.location.hash.includes("?")) {
+      // when loads Sidepanel, query is after a hashtag because of hash router
+      rawQuery = window.location.hash.split("?")[1];
+    }
+
     if (!rawQuery) {
       setStatus("error");
       return; // short circuit

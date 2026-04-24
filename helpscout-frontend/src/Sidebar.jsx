@@ -1,9 +1,14 @@
 import HelpScout from '@helpscout/javascript-sdk';
+import { useEffect } from 'react';
 import './Sidebar.css';
 
 function Sidebar() {
+    useEffect(() => {
+        HelpScout.setAppHeight(document.body.scrollHeight); // flexible for now, consider stick to a fixed number
+    }, []);
+
     const handleOpenSummaryPanel = () => {
-        HelpScout.openSidePanel('http://localhost:5173/#/panel');
+        HelpScout.openSidePanel('https://jackie-opn.github.io/Customer-Support-Demo/#/panel');
     };
 
     return (
